@@ -21,7 +21,7 @@ public class Server {
 
 
             try {
-
+                // Socket
                 socket = serverSocket.accept();
                 System.out.println("Client connected -");
 

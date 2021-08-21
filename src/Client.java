@@ -6,6 +6,7 @@ public class Client {
 
     public static void main(String[] args) {
 
+        // Socket
         Socket socket = null;
         InputStreamReader inputStreamReader = null;
         OutputStreamWriter outputStreamWriter = null;
