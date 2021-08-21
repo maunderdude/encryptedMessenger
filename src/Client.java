@@ -6,7 +6,7 @@ public class Client {
 
     public static void main(String[] args) {
 
-        // Socket
+        // Initialize objects
         Socket socket = null;
         InputStreamReader inputStreamReader = null;
         OutputStreamWriter outputStreamWriter = null;
@@ -15,26 +15,29 @@ public class Client {
 
 
         try {
+            // Connection socket to server IP and port
             socket = new Socket("192.168.0.21", 6774);
 
+            // Read and write
             inputStreamReader = new InputStreamReader(socket.getInputStream());
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
-
             bufferedReader = new BufferedReader(inputStreamReader);
             bufferedWriter = new BufferedWriter(outputStreamWriter);
 
             Scanner scan = new Scanner(System.in);
 
+            // While loop to listen for response
             while(true) {
+                // Read and display client message
+                System.out.println("Anonymous: " + bufferedReader.readLine());
 
+                // Write and send next line
                 String msgToSend = scan.nextLine();
                 bufferedWriter.write(msgToSend);
                 bufferedWriter.newLine();
-                bufferedWriter.flush();
+                bufferedWriter.flush(); // flush writer
 
-                System.out.println("Anonymous: " + bufferedReader.readLine());
-
-
+                // Break condition
                 if(msgToSend.equalsIgnoreCase("333")){
                     break;
                 }
@@ -42,6 +45,8 @@ public class Client {
 
         } catch (IOException e) {
             System.out.println("Client error " + e.getMessage());
+
+            // Close resources
         } finally{
             try{
                 if(socket != null){
