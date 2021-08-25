@@ -22,12 +22,13 @@ public class Server {
         // While loop listening for connection
         while (true) {
 
+
             try {
-                // Accept and acknowledge connection
+                // Socket connection
                 socket = serverSocket.accept();
                 System.out.println("Client connected -");
 
-                // Read & write
+                // Input and output streamers
                 inputStreamReader = new InputStreamReader(socket.getInputStream());
                 outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
@@ -35,19 +36,18 @@ public class Server {
 
                 Scanner scan = new Scanner(System.in);
 
-                // While loop to listen for response
                 while (true) {
+                    // Receive message
+                    String msgFromClient = bufferedReader.readLine();
+                    System.out.println("User: " + msgFromClient);
 
-                    // Read and display client message
-                    System.out.println("User: " + bufferedReader.readLine());
-
-                    // Write and send next line
+                    // Send message
                     String msgToSend = scan.nextLine();
                     bufferedWriter.write(msgToSend);
                     bufferedWriter.newLine();
-                    bufferedWriter.flush(); // flush writer
+                    bufferedWriter.flush();
 
-                    // Break condition
+
                     if (msgToSend.equalsIgnoreCase("333")) {
                         break;
                     }

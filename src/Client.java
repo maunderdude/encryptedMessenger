@@ -13,14 +13,16 @@ public class Client {
         BufferedReader bufferedReader = null;
         BufferedWriter bufferedWriter = null;
 
+        char [] encrypt; // array for encryption
+        int key = 5; // encryption key
 
         try {
-            // Connection socket to server IP and port
             socket = new Socket("192.168.0.21", 6774);
 
             // Read and write
             inputStreamReader = new InputStreamReader(socket.getInputStream());
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
+
             bufferedReader = new BufferedReader(inputStreamReader);
             bufferedWriter = new BufferedWriter(outputStreamWriter);
 
@@ -28,16 +30,22 @@ public class Client {
 
             // While loop to listen for response
             while(true) {
-                // Read and display client message
+
+                String msgToSend = scan.nextLine();
+                // Assigning user input to char array
+                encrypt = msgToSend.toCharArray();
+                // encrypting the char array
+                for(char c : encrypt){
+                    c += 5;
+                    bufferedWriter.write(c);
+                }
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+
+                // Reading server message
                 System.out.println("Anonymous: " + bufferedReader.readLine());
 
-                // Write and send next line
-                String msgToSend = scan.nextLine();
-                bufferedWriter.write(msgToSend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush(); // flush writer
 
-                // Break condition
                 if(msgToSend.equalsIgnoreCase("333")){
                     break;
                 }
