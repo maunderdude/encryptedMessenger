@@ -1,5 +1,5 @@
 # encryptedMessenger
-A  secure communication app between server and client.
+Socket programming, server/client communication, encryption.
 
 I created this to get a basic understanding of socket programming.
 
