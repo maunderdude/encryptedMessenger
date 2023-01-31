@@ -1,5 +1,8 @@
 # encryptedMessenger
-Socket programming, server/client communication, encryption.
+
+- Socket programming
+- Server / client communication
+- Encryption
 
 I created this to get a basic understanding of socket programming.
 
